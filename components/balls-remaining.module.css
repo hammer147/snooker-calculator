@@ -1,0 +1,15 @@
+.title {
+  text-align: center;
+  background-color: #0070f3;
+  color: white;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 1em;
+}
+
+/* duplicate css file, same as score.module.css*/

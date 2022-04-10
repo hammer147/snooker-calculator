@@ -1,0 +1,15 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 1em;
+
+}
+
+.display, .value {
+  grid-column: 1 / 4;
+  text-align: center;
+}
+
+.value {
+  font-size: 2em;
+}

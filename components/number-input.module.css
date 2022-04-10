@@ -1,0 +1,14 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.value {
+  grid-column: 1 / 4;
+  border: 1px solid black;
+}
+
+.clear {
+  grid-column: 2 / 4;
+}
