@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { AppContext } from '../context/app-context'
 import { whatIsNeeded } from '../utils'
+import Title from './title'
 
 
 const Results = () => {
@@ -13,11 +14,9 @@ const Results = () => {
   const playerTwoToWin = whatIsNeeded(scorePlayerTwo, scorePlayerOne, numReds, numColors, !isActivePlayerOne, nextIsFreeBall, nextIsColorAfterRed)
 
   return (
+    <>
+    <Title text='Results' background='green' />
     <div>
-      <hr />
-      <pre>{JSON.stringify(game, null, 2)}</pre>
-      <hr />
-
       <div>Player One</div>
       <div>{playerOneToWin.steps}</div>
       <div>{`${playerOneToWin.winnerScore} - ${playerOneToWin.loserScore}`}</div>
@@ -27,7 +26,12 @@ const Results = () => {
       <div>{playerTwoToWin.steps}</div>
       <div>{`${playerTwoToWin.winnerScore} - ${playerTwoToWin.loserScore}`}</div>
       <div>{`${playerTwoToWin.winnerScore - playerTwoToWin.loserScore}`}</div>
+
+      <hr />
+      <pre>{JSON.stringify(game, null, 2)}</pre>
+      <hr />
     </div>
+    </>
   )
 }
 export default Results

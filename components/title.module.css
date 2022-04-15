@@ -1,0 +1,14 @@
+.title {
+  text-align: center;
+  color: white;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.blue {
+  background-color: #0070f3;
+}
+
+.green {
+  background-color: green;
+}
