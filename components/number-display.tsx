@@ -1,4 +1,3 @@
-import { MouseEventHandler } from 'react'
 import styles from './number-display.module.css'
 
 type Props = {
