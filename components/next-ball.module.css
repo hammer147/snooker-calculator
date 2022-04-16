@@ -1,1 +1,12 @@
-.container {}
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 1em;
+}
+
+.container div {
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 0.5em;
+}

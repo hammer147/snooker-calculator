@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { AppContext } from '../context/app-context'
 import { whatIsNeeded } from '../utils'
 import Title from './title'
-
+import styles from './results.module.css'
 
 const Results = () => {
   const { state: { game }, dispatch } = useContext(AppContext)
@@ -15,22 +15,36 @@ const Results = () => {
 
   return (
     <>
-    <Title text='Results' background='green' />
-    <div>
-      <div>Player One</div>
-      <div>{playerOneToWin.steps}</div>
-      <div>{`${playerOneToWin.winnerScore} - ${playerOneToWin.loserScore}`}</div>
-      <div>{`${playerOneToWin.winnerScore - playerOneToWin.loserScore}`}</div>
-      <hr />
-      <div>Player Two</div>
-      <div>{playerTwoToWin.steps}</div>
-      <div>{`${playerTwoToWin.winnerScore} - ${playerTwoToWin.loserScore}`}</div>
-      <div>{`${playerTwoToWin.winnerScore - playerTwoToWin.loserScore}`}</div>
+      <Title text='Results' background='green' />
+      <div className={styles.container}>
 
-      <hr />
+        <div className={styles.card}>
+          <div className={styles.player}>Player 1</div>
+          <div>{`${playerOneToWin.aheadOrBehind}`}</div>
+          <div>{playerOneToWin.difference}</div>
+          <div>{`Available`}</div>
+          <div>{playerOneToWin.available}</div>
+          <div className={styles.needed}>{`To win ${playerOneToWin.winnerScore} - ${playerOneToWin.loserScore} (${playerOneToWin.winnerScore - playerOneToWin.loserScore})`}</div>
+          <div className={styles.steps}>{playerOneToWin.steps}</div>
+        </div>
+
+        <div className={styles.card}>
+          <div className={styles.player}>Player 2</div>
+          <div>{`${playerTwoToWin.aheadOrBehind}`}</div>
+          <div>{playerTwoToWin.difference}</div>
+          <div>{`Available`}</div>
+          <div>{playerTwoToWin.available}</div>
+          <div className={styles.needed}>{`To win ${playerTwoToWin.winnerScore} - ${playerTwoToWin.loserScore} (${playerTwoToWin.winnerScore - playerTwoToWin.loserScore})`}</div>
+          <div className={styles.steps}>{playerTwoToWin.steps}</div>
+        </div>
+
+        
+
+      </div>
+
+      {/* <hr />
       <pre>{JSON.stringify(game, null, 2)}</pre>
-      <hr />
-    </div>
+      <hr /> */}
     </>
   )
 }

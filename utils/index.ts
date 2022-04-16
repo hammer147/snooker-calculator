@@ -89,9 +89,13 @@ export function whatIsNeeded(
     }
   }
 
-  if (steps === '') steps = 'Opponent already needs snookers'
+  if (steps === '') steps = 'Nothing'
 
-  return { steps, winnerScore, loserScore }
+  const aheadOrBehind = scoreSelf >= scoreOther ? 'Ahead' : 'Behind'
+  const difference = Math.abs(scoreSelf - scoreOther)
+  const available = pointsLeft(numReds, numColors) // todo free ball
+
+  return { steps, winnerScore, loserScore, aheadOrBehind, difference, available }
 
 }
 
