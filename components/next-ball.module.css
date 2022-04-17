@@ -2,11 +2,15 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 1em;
+  text-align: center;
 }
 
-.container div {
-  text-align: center;
-  border: 1px solid black;
-  border-radius: 3px;
+.container > div {
   margin: 0.5em;
+}
+
+.active {
+  /* background-color: #78C3FB; */
+  border: 3px solid #FE64A3;
+  border-radius: 3px;
 }
