@@ -4,14 +4,14 @@ import styles from './scores.module.css'
 import Title from './title'
 import { useContext, useState } from 'react'
 import { AppContext } from '../context/app-context'
-import { adjustPlayerScore, setPlayerScore } from '../context/game'
+import { adjustPlayerScore, setActivePlayer, setPlayerScore } from '../context/game'
 
 const Scores = () => {
 
   const [number, setNumber] = useState(0) // number to modify score with
 
   const { state: { game }, dispatch } = useContext(AppContext)
-  const { scorePlayerOne, scorePlayerTwo } = game
+  const { scorePlayerOne, scorePlayerTwo, isActivePlayerOne } = game
 
   return (
     <>
@@ -19,6 +19,8 @@ const Scores = () => {
       <div className={styles.container}>
         <NumberDisplay
           display="Player 1"
+          displayClass={isActivePlayerOne ? "active" : ""}
+          displayClickHandler={() => dispatch(setActivePlayer(1))}
           value={scorePlayerOne}
           inputValue={number}
           subtract={(x: number) => dispatch(adjustPlayerScore('scorePlayerOne', -x))}
@@ -28,6 +30,8 @@ const Scores = () => {
         <NumberInput number={number} setNumber={setNumber} />
         <NumberDisplay
           display="Player 2"
+          displayClass={isActivePlayerOne ? "" : "active"}
+          displayClickHandler={() => dispatch(setActivePlayer(2))}
           value={scorePlayerTwo}
           inputValue={number}
           subtract={(x: number) => dispatch(adjustPlayerScore('scorePlayerTwo', -x))}

@@ -2,6 +2,8 @@ import styles from './number-display.module.css'
 
 type Props = {
   display: string
+  displayClass?: string
+  displayClickHandler?: () => void
   value: number
   inputValue: number
   subtract: (x: number) => void
@@ -9,15 +11,15 @@ type Props = {
   setTo: (x: number) => void
 }
 
-const NumberDisplay = ({ display, value, inputValue, subtract, add, setTo }: Props) => {
+const NumberDisplay = ({ display, displayClass = '', displayClickHandler, value, inputValue, subtract, add, setTo }: Props) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.display}>{display}</div>
+      <div onClick={displayClickHandler} className={`${styles.display} ${styles[displayClass]}`}>{display}</div>
       <div className={styles.value}>{value}</div>
-      <button onClick={() => subtract(inputValue)}>- {inputValue}</button>
-      <button onClick={() => add(inputValue)}>+ {inputValue}</button>
-      <button onClick={() => setTo(inputValue)}>{inputValue}</button>
+      <button onClick={() => subtract(inputValue)}>- <span>{inputValue}</span></button>
+      <button onClick={() => add(inputValue)}>+ <span>{inputValue}</span></button>
+      <button onClick={() => setTo(inputValue)}><span>{inputValue}</span></button>
     </div>
   )
 }
