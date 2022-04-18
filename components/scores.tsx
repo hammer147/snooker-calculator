@@ -14,12 +14,12 @@ const Scores = () => {
   const { scorePlayerOne, scorePlayerTwo, isActivePlayerOne } = game
 
   return (
-    <>
+    <div className={styles.scores}>
       <Title text='Scores and Active Player' />
       <div className={styles.container}>
         <NumberDisplay
-          display="Player 1"
-          displayClass={isActivePlayerOne ? "active" : ""}
+          displayText='Player 1'
+          displayClasses={isActivePlayerOne ? ['active', 'clickable'] : ['clickable']}
           displayClickHandler={() => dispatch(setActivePlayer(1))}
           value={scorePlayerOne}
           inputValue={number}
@@ -29,8 +29,8 @@ const Scores = () => {
         />
         <NumberInput number={number} setNumber={setNumber} />
         <NumberDisplay
-          display="Player 2"
-          displayClass={isActivePlayerOne ? "" : "active"}
+          displayText='Player 2'
+          displayClasses={isActivePlayerOne ? ['clickable'] : ['active', 'clickable']}
           displayClickHandler={() => dispatch(setActivePlayer(2))}
           value={scorePlayerTwo}
           inputValue={number}
@@ -39,7 +39,7 @@ const Scores = () => {
           setTo={(x: number) => dispatch(setPlayerScore('scorePlayerTwo', x))}
         />
       </div>
-    </>
+    </div>
   )
 }
 

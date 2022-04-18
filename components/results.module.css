@@ -1,33 +1,22 @@
+.results {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.5em;
+  column-gap: 1px;
+  background-color: black;
 }
 
 .card {
-  text-align: center;
-  border: 1px solid black;
-  border-radius: 3px;
-  margin: 0.5em;
-  padding: 0.5em;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  row-gap: 1em;
-}
-
-.container :nth-child(1) {
-  margin-right: 0;
-}
-
-.container :nth-child(2) {
-  margin-left: 0;
-}
-
-.player {
-  grid-column: 1 / 5;
-
-}
-
-.needed, .steps {
-  grid-column: 1 / 5;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 0.5em;
 }

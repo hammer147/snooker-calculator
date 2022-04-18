@@ -11,14 +11,30 @@
 
 .value {
   font-size: 2em;
-}
-
-.active {
-  /* background-color: #78C3FB; */
-  border: 3px solid #FE64A3;
-  border-radius: 3px;
+  margin: 0.5em;
 }
 
 .container span {
   color: blue;
 }
+
+.container button {
+  background-color: white;
+  margin: 0 0.2em;
+  border-radius: 0.2em;
+}
+
+.display {
+  border-radius: 2em;
+  border: 3px solid white;
+}
+
+.clickable:hover {
+  border-color: #ccc;
+  cursor: pointer;
+}
+
+.active, .active:hover {
+  border-color: #FE64A3
+}
+

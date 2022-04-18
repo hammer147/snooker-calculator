@@ -1,0 +1,15 @@
+.container {
+  height: 100vh;
+  display: grid;
+  background-color: black;
+  column-gap: 1px;
+  max-width:1200px;
+  border: 1px solid black;
+}
+
+@media only screen and (orientation: landscape) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}

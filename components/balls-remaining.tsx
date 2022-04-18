@@ -14,11 +14,11 @@ const BallsRemaining = () => {
   const { numReds, numColors } = game
 
   return (
-    <>
+    <div className={styles.ballsRemaining}>
       <Title text='Balls Remaining' />
       <div className={styles.container}>
         <NumberDisplay
-          display="Reds"
+          displayText='Reds'
           value={numReds}
           inputValue={number}
           subtract={(x: number) => dispatch(adjustRemainingBalls('numReds', -x))}
@@ -27,7 +27,7 @@ const BallsRemaining = () => {
         />
         <NumberInput number={number} setNumber={setNumber} />
         <NumberDisplay
-          display="Colors"
+          displayText='Colors'
           value={numColors}
           inputValue={number}
           subtract={(x: number) => dispatch(adjustRemainingBalls('numColors', -x))}
@@ -35,7 +35,7 @@ const BallsRemaining = () => {
           setTo={(x: number) => dispatch(setRemainingBalls('numColors', x))}
         />
       </div>
-    </>
+    </div>
   )
 }
 

@@ -1,5 +1,12 @@
+.scores {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 1em;
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

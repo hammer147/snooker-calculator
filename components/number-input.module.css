@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
+  background-color: black;
+  gap: 1px;
 }
 
 .value {
@@ -10,8 +12,15 @@
   text-align: right;
   padding-right: 0.5em;
   color: blue;
+  background-color: white;
 }
 
 .clear {
   grid-column: 2 / 4;
+}
+
+.container button {
+  background-color: white;
+  border: 0;
+  padding-top: 0.2em;
 }

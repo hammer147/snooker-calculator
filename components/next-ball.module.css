@@ -1,16 +1,27 @@
+.nextBall {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 1em;
-  text-align: center;
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.container > div {
-  margin: 0.5em;
+.option {
+  border: 3px solid white;
+  border-radius: 2em;
+  padding: 0.3em
 }
 
-.active {
-  /* background-color: #78C3FB; */
-  border: 3px solid #FE64A3;
-  border-radius: 3px;
+.option:hover {
+  border-color: #ccc;
+  cursor: pointer;
+}
+
+.active, .active:hover {
+  border-color: #FE64A3;
 }
