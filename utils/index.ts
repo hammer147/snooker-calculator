@@ -15,8 +15,10 @@ export function whatIsNeeded(
   let blacksNeeded = 0
   let colorsNeeded = 0
   let snookersNeeded = 0
+  let freeBallNeeded = 0
 
   const penaltyPoints = Math.max(4, 8 - numColors)
+  const freeBallPoints = numReds > 0 ? 1 : 8 - numColors
 
   if (!isActiveSelf) {
     isColorAfterRed = false
@@ -28,23 +30,34 @@ export function whatIsNeeded(
     redsNeeded +
     (blacksNeeded * 7) +
     colorPoints(colorsNeeded, numColors) +
-    snookersNeeded * penaltyPoints
+    snookersNeeded * penaltyPoints +
+    freeBallNeeded * freeBallPoints
     <=
     scoreOther + pointsLeft(numReds - redsNeeded, numColors - colorsNeeded)
   ) {
     if (redsNeeded < numReds) { // reds remain
-      if (!isColorAfterRed) {
-        redsNeeded++
+      if (!isColorAfterRed) { // on a red or free ball
+        if (isFreeBall) { // on a free ball
+          freeBallNeeded++
+          isFreeBall = false
+        } else { // on a red
+          redsNeeded++
+        }
         isColorAfterRed = true
-      } else {
+      } else { // on a color after a red
         blacksNeeded++
         isColorAfterRed = false
       }
-    } else if (redsNeeded === numReds && isColorAfterRed) { // last red was potted
+    } else if (redsNeeded === numReds && isColorAfterRed) { // on a color after the last red
       blacksNeeded++
       isColorAfterRed = false
     } else if (colorsNeeded < numColors) { // only colors left
-      colorsNeeded++
+      if (isFreeBall) {
+        freeBallNeeded++
+        isFreeBall = false
+      } else {
+        colorsNeeded++
+      }
     } else { // snookers
       snookersNeeded++
     }
@@ -55,40 +68,68 @@ export function whatIsNeeded(
     redsNeeded +
     (blacksNeeded * 7) +
     colorPoints(colorsNeeded, numColors) +
-    snookersNeeded * penaltyPoints
+    snookersNeeded * penaltyPoints +
+    freeBallNeeded * freeBallPoints
 
   const loserScore = scoreOther + pointsLeft(numReds - redsNeeded, numColors - colorsNeeded)
 
   isColorAfterRed = nextIsColorAfterRed // restore original value
 
-  let steps = ''
+  
+  let oneRedOnly = ''
+  let freeBallOnly = ''
+  let separatedBlack = '' // nextIsColorAfterRed
+  let freeBallBlackCombination = ''
+  let redBlackCombinations = ''
+  let oneMoreRed = ''
+  let freeBallOnColors = ''
+  let colors = ''
+  let snookers = ''
 
-  if (redsNeeded === 1 && !blacksNeeded) {
-    steps += '1 Red'
-  }
-  else {
+  if (freeBallNeeded === 1 && freeBallPoints === 1 && !blacksNeeded) {
+    freeBallOnly = '1 Free Ball'
+  } else if (redsNeeded === 1 && !blacksNeeded) {
+    oneRedOnly = '1 Red'
+  } else {
+    if (freeBallNeeded === 1 && freeBallPoints === 1 && blacksNeeded) {
+      freeBallBlackCombination = '1 x (Free Ball + Black)'
+      blacksNeeded--
+    }
     if (isActiveSelf && isColorAfterRed && blacksNeeded > 0) {
-      steps += '1 Black'
+      separatedBlack = '1 Black'
       blacksNeeded--
     }
     if (blacksNeeded) {
-      steps += `${steps ? ' +' : ''} ${blacksNeeded} x (Red + Black)`
+      redBlackCombinations = `${blacksNeeded} x (Red + Black)`
     }
     if (redsNeeded > blacksNeeded) {
-      steps += `${steps ? ' +' : ''} 1 Red`
+      oneMoreRed = '1 Red'
     } else {
-      if (colorsNeeded) {
-        steps += `${steps ? ' +' : ''} ${colorsNeeded} ${colorsNeeded == 1 ? 'Color' : 'Colors'}`
+      if (freeBallNeeded === 1 && freeBallPoints > 1) {
+        freeBallOnColors = '1 Free Ball'
       }
-      // if (snookersNeeded) {
-      //   steps = `${snookersNeeded} ${snookersNeeded == 1 ? '(' + penaltyPoints + ' point) Snooker' : '(' + penaltyPoints + ' point) Snookers'} +` + steps
-      // }
+      if (colorsNeeded) {
+        colors = `${colorsNeeded} ${colorsNeeded === 1 ? 'Color' : 'Colors'}`
+      }
       if (snookersNeeded) {
-        steps = `${snookersNeeded} ${snookersNeeded == 1 ? 'Snooker' : 'Snookers'} + ` + steps
+        snookers = `${snookersNeeded} ${snookersNeeded === 1 ? 'Snooker' : 'Snookers'}`
       }
     }
   }
 
+  let steps = ''
+
+  oneRedOnly ? (steps ? steps += ' + ' + oneRedOnly : steps += oneRedOnly ) : steps += ''
+  freeBallOnly ? (steps ? steps += ' + ' + freeBallOnly : steps += freeBallOnly ) : steps += ''
+  separatedBlack ? (steps ? steps += ' + ' + separatedBlack : steps += separatedBlack ) : steps += ''
+  freeBallBlackCombination ? (steps ? steps += ' + ' + freeBallBlackCombination : steps += freeBallBlackCombination ) : steps += ''
+  snookers ? (steps ? steps += ' + ' + snookers : steps += snookers ) : steps += ''
+  redBlackCombinations ? (steps ? steps += ' + ' + redBlackCombinations : steps += redBlackCombinations ) : steps += ''
+  oneMoreRed ? (steps ? steps += ' + ' + oneMoreRed : steps += oneMoreRed ) : steps += ''
+  freeBallOnColors ? (steps ? steps += ' + ' + freeBallOnColors : steps += freeBallOnColors ) : steps += ''
+  colors ? (steps ? steps += ' + ' + colors : steps += colors ) : steps += ''
+
+  
   if (steps === '') steps = 'Nothing'
 
   const aheadOrBehind = scoreSelf >= scoreOther ? 'Ahead' : 'Behind'
@@ -98,11 +139,6 @@ export function whatIsNeeded(
   return { steps, winnerScore, loserScore, aheadOrBehind, difference, available }
 
 }
-
-// todos
-// in messages like this, the 1 black must come first : 13 Snookers + 1 Black + 7 x (Red + Black) + 6 Colors
-// comment on lesser colors then black without extra red or extra snooker
-// freeball 
 
 
 // returns total points left on the table
