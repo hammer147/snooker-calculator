@@ -56,13 +56,15 @@ const NextBall = () => {
             Color after Red
           </div>
         )}
+        {!(numColors < 2) && (
+          <div
+            className={`${styles.option} ${nextIsFreeBall ? styles.active : ''}`}
+            onClick={() => { dispatch(setNextBall('freeBall')) }}
+          >
+            Free Ball
+          </div>
+        )}
 
-        <div
-          className={`${styles.option} ${nextIsFreeBall ? styles.active : ''}`}
-          onClick={() => { dispatch(setNextBall('freeBall')) }}
-        >
-          Free Ball
-        </div>
       </div>
     </div>
   )
