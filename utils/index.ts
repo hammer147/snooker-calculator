@@ -73,9 +73,15 @@ export function whatIsNeeded(
 
   const loserScore = scoreOther + pointsLeft(numReds - redsNeeded, numColors - colorsNeeded)
 
-  isColorAfterRed = nextIsColorAfterRed // restore original value
 
+  isColorAfterRed = nextIsColorAfterRed // restore original value
+  isFreeBall = nextIsFreeBall // restore original value
+  if (!isActiveSelf) {
+    isColorAfterRed = false
+    isFreeBall = false
+  }
   
+
   let oneRedOnly = ''
   let freeBallOnly = ''
   let separatedBlack = '' // nextIsColorAfterRed
@@ -119,31 +125,38 @@ export function whatIsNeeded(
 
   let steps = ''
 
-  oneRedOnly ? (steps ? steps += ' + ' + oneRedOnly : steps += oneRedOnly ) : steps += ''
-  freeBallOnly ? (steps ? steps += ' + ' + freeBallOnly : steps += freeBallOnly ) : steps += ''
-  separatedBlack ? (steps ? steps += ' + ' + separatedBlack : steps += separatedBlack ) : steps += ''
-  freeBallBlackCombination ? (steps ? steps += ' + ' + freeBallBlackCombination : steps += freeBallBlackCombination ) : steps += ''
-  snookers ? (steps ? steps += ' + ' + snookers : steps += snookers ) : steps += ''
-  redBlackCombinations ? (steps ? steps += ' + ' + redBlackCombinations : steps += redBlackCombinations ) : steps += ''
-  oneMoreRed ? (steps ? steps += ' + ' + oneMoreRed : steps += oneMoreRed ) : steps += ''
-  freeBallOnColors ? (steps ? steps += ' + ' + freeBallOnColors : steps += freeBallOnColors ) : steps += ''
-  colors ? (steps ? steps += ' + ' + colors : steps += colors ) : steps += ''
+  oneRedOnly ? (steps ? steps += ' + ' + oneRedOnly : steps += oneRedOnly) : steps += ''
+  freeBallOnly ? (steps ? steps += ' + ' + freeBallOnly : steps += freeBallOnly) : steps += ''
+  separatedBlack ? (steps ? steps += ' + ' + separatedBlack : steps += separatedBlack) : steps += ''
+  freeBallBlackCombination ? (steps ? steps += ' + ' + freeBallBlackCombination : steps += freeBallBlackCombination) : steps += ''
+  snookers ? (steps ? steps += ' + ' + snookers : steps += snookers) : steps += ''
+  redBlackCombinations ? (steps ? steps += ' + ' + redBlackCombinations : steps += redBlackCombinations) : steps += ''
+  oneMoreRed ? (steps ? steps += ' + ' + oneMoreRed : steps += oneMoreRed) : steps += ''
+  freeBallOnColors ? (steps ? steps += ' + ' + freeBallOnColors : steps += freeBallOnColors) : steps += ''
+  colors ? (steps ? steps += ' + ' + colors : steps += colors) : steps += ''
 
-  
   if (steps === '') steps = 'Nothing'
 
   const aheadOrBehind = scoreSelf >= scoreOther ? 'Ahead' : 'Behind'
   const difference = Math.abs(scoreSelf - scoreOther)
-  const available = pointsLeft(numReds, numColors) // todo free ball
+  const available = pointsLeft(numReds, numColors, isColorAfterRed, isFreeBall)
 
   return { steps, winnerScore, loserScore, aheadOrBehind, difference, available }
-
 }
 
 
 // returns total points left on the table
-function pointsLeft(reds: number, colors: number) {
-  let result = reds * 8
+function pointsLeft(reds: number, colors: number, onColorAfterRed: boolean = false, onFreeBall: boolean = false) {
+  let result = 0
+  if (onColorAfterRed) result += 7
+  result += reds * 8
+  if (onFreeBall) {
+    if (reds > 0) {
+      result += 8
+    } else {
+      result += 8 - colors
+    }
+  }
   for (let i = 0; i < colors; i++) {
     result += 7 - i
   }
@@ -153,7 +166,7 @@ function pointsLeft(reds: number, colors: number) {
 // returns the points obtained by potting x of the remaining colors
 function colorPoints(x: number, colors: number) {
   let result = 0
-  let lowestColVal = 7 - colors + 1
+  let lowestColVal = 8 - colors
   for (let i = 0; i < x; i++) {
     result += lowestColVal
     lowestColVal++
