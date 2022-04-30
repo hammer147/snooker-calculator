@@ -1,4 +1,4 @@
-import { Dispatch, MouseEventHandler, SetStateAction } from 'react'
+import { Dispatch, MouseEventHandler, SetStateAction, useState } from 'react'
 import styles from './number-input.module.css'
 
 type Props = {
@@ -8,9 +8,17 @@ type Props = {
 
 const NumberInput = ({ number, setNumber }: Props) => {
 
+  const [latestInputTime, setLastInputTime] = useState(0)
+
   const handleClick: MouseEventHandler<HTMLButtonElement> = e => {
-    const newNumber = String(number) + e.currentTarget.innerText
+    let newNumber = ''
+    if (Date.now() - latestInputTime > 2000) {
+      newNumber = e.currentTarget.innerText
+    } else {
+      newNumber = String(number) + e.currentTarget.innerText
+    }
     setNumber(+newNumber)
+    setLastInputTime(Date.now())
   }
 
   return (
@@ -26,7 +34,7 @@ const NumberInput = ({ number, setNumber }: Props) => {
       <button onClick={handleClick}>2</button>
       <button onClick={handleClick}>3</button>
       <button onClick={handleClick}>0</button>
-      <button onClick={() => setNumber(0)} className={styles.clear}>CLEAR</button>
+      <button className={styles.clear}></button>
     </div>
   )
 }
