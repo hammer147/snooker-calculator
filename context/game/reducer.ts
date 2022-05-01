@@ -28,13 +28,13 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
     case ActionType.setScore:
       return {
         ...state,
-        [action.payload.player]: action.payload.score
+        [action.payload.player]: Math.min(999, Math.max(0, action.payload.score))
       }
 
     case ActionType.adjustScore:
       return {
         ...state,
-        [action.payload.player]: state[action.payload.player] + action.payload.valueToAdd
+        [action.payload.player]: Math.min(999, Math.max(0, state[action.payload.player] + action.payload.valueToAdd))
       }
 
     case ActionType.setActivePlayer:
@@ -44,15 +44,33 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
       }
 
     case ActionType.setRemainingBalls:
-      return {
-        ...state,
-        [action.payload.redsOrColors]: action.payload.number
+      if (action.payload.redsOrColors === 'numReds'){
+        return {
+          ...state,
+          numReds: Math.min(15, Math.max(0, action.payload.number)),
+          numColors: action.payload.number > 0 ? 6 : state.numColors
+        }
+      } else { // if (action.payload.redsOrColors === 'numColors')
+        return {
+          ...state,
+          numReds: action.payload.number < 6 ? 0 : state.numReds,
+          numColors: Math.min(6, Math.max(0, action.payload.number)),
+        }
       }
 
     case ActionType.adjustRemainingBalls:
-      return {
-        ...state,
-        [action.payload.redsOrColors]: state[action.payload.redsOrColors] + action.payload.valueToAdd
+      if (action.payload.redsOrColors === 'numReds') {
+        return {
+          ...state,
+          numReds: Math.min(15,Math.max(0,state.numReds + action.payload.valueToAdd)),
+          numColors: Math.min(15,Math.max(0,state.numReds + action.payload.valueToAdd)) > 0 ? 6 : state.numColors
+        }
+      } else { // if (action.payload.redsOrColors === 'numColors')
+        return {
+          ...state,
+          numReds: Math.min(6, Math.max(0, state.numColors + action.payload.valueToAdd)) < 6 ? 0 : state.numReds,
+          numColors: Math.min(6, Math.max(0, state.numColors + action.payload.valueToAdd)),
+        }
       }
 
     case ActionType.setNextBall:
