@@ -8,14 +8,15 @@ type Props = {
 
 const NumberInput = ({ number, setNumber }: Props) => {
 
-  const [latestInputTime, setLastInputTime] = useState(0)
+  const [lastInputTime, setLastInputTime] = useState(0)
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = e => {
     let newNumber = ''
-    if (Date.now() - latestInputTime > 2000) {
+    if (Date.now() - lastInputTime > 2000) {
       newNumber = e.currentTarget.innerText
     } else {
-      newNumber = String(number) + e.currentTarget.innerText
+      // limit number to 3 digits (4 digit input will display 0 because nemNumber remains an empty string)
+      if (number < 100) newNumber = String(number) + e.currentTarget.innerText
     }
     setNumber(+newNumber)
     setLastInputTime(Date.now())
