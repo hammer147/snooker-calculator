@@ -42,12 +42,14 @@ const NextBall = () => {
     <div className={styles.nextBall}>
       <Title text='Next Ball' />
       <div className={styles.container}>
-        <div
-          className={`${styles.option} ${(!nextIsColorAfterRed && !nextIsFreeBall) ? styles.active : ''}`}
-          onClick={() => { dispatch(setNextBall('redOrLowestColor')) }}
-        >
-          {redOrColor}
-        </div>
+        {!(numColors === 0) && (
+          <div
+            className={`${styles.option} ${(!nextIsColorAfterRed && !nextIsFreeBall) ? styles.active : ''}`}
+            onClick={() => { dispatch(setNextBall('redOrLowestColor')) }}
+          >
+            {redOrColor}
+          </div>
+        )}
         {!(numColors < 6) && (
           <div
             className={`${styles.option} ${nextIsColorAfterRed ? styles.active : ''}`}

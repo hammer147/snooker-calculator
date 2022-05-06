@@ -33,7 +33,7 @@ const Results = () => {
       </div>
     )
 
-  } else if (numColors === 1 && Math.abs(scorePlayerOne - scorePlayerTwo) === 7){
+  } else if (numColors === 1 && Math.abs(scorePlayerOne - scorePlayerTwo) === 7) {
     // possible respot black
     return (
       <div className={styles.results}>
@@ -64,6 +64,9 @@ const Results = () => {
     const playerOneToWin = whatIsNeeded(scorePlayerOne, scorePlayerTwo, numReds, numColors, isActivePlayerOne, nextIsFreeBall, nextIsColorAfterRed)
     const playerTwoToWin = whatIsNeeded(scorePlayerTwo, scorePlayerOne, numReds, numColors, !isActivePlayerOne, nextIsFreeBall, nextIsColorAfterRed)
 
+    // hideCalc while black is respotted
+    const hideCalc = scorePlayerOne === scorePlayerTwo && numReds === 0 && numColors === 0
+
     return (
       <div className={styles.results}>
         <Title text='Results' background='green' />
@@ -71,18 +74,40 @@ const Results = () => {
 
           <div className={styles.card}>
             <div className={styles.player}>Player 1</div>
-            <div>{`${playerOneToWin.aheadOrBehind} ${playerOneToWin.difference}`}</div>
-            <div>{`Available ${playerOneToWin.available}`}</div>
-            <div className={styles.needed}>{`To win ${playerOneToWin.winnerScore} - ${playerOneToWin.loserScore} (${playerOneToWin.winnerScore - playerOneToWin.loserScore})`}</div>
-            <div className={styles.steps}>{playerOneToWin.steps}</div>
+
+            <div>
+              <div className={styles.spaceBetween}>
+                <span>{`${playerOneToWin.aheadOrBehind} `}</span>
+                <span>{playerOneToWin.difference}</span>
+              </div>
+              <div>{`Available ${playerOneToWin.available}`}</div>
+            </div>
+
+            {hideCalc || (
+              <div style={{background:'orange', padding:'5px'}}>
+                <div className={styles.needed}>{`To win ${playerOneToWin.winnerScore} - ${playerOneToWin.loserScore} (${playerOneToWin.winnerScore - playerOneToWin.loserScore}) needs:`}</div>
+                <div className={styles.steps}>{playerOneToWin.steps}</div>
+              </div>
+            )}
           </div>
 
           <div className={styles.card}>
             <div className={styles.player}>Player 2</div>
-            <div>{`${playerTwoToWin.aheadOrBehind} ${playerTwoToWin.difference}`}</div>
-            <div>{`Available ${playerTwoToWin.available}`}</div>
-            <div className={styles.needed}>{`To win ${playerTwoToWin.winnerScore} - ${playerTwoToWin.loserScore} (${playerTwoToWin.winnerScore - playerTwoToWin.loserScore})`}</div>
-            <div className={styles.steps}>{playerTwoToWin.steps}</div>
+
+            <div>
+              <div className={styles.spaceBetween}>
+                <span>{`${playerTwoToWin.aheadOrBehind} `}</span>
+                <span>{playerTwoToWin.difference}</span>
+              </div>
+              <div>{`Available ${playerTwoToWin.available}`}</div>
+            </div>
+
+            {hideCalc || (
+              <div style={{background:'orange', padding:'5px'}}>
+                <div className={styles.needed}>{`To win ${playerTwoToWin.winnerScore} - ${playerTwoToWin.loserScore} (${playerTwoToWin.winnerScore - playerTwoToWin.loserScore}) needs:`}</div>
+                <div className={styles.steps}>{playerTwoToWin.steps}</div>
+              </div>
+            )}
           </div>
 
         </div>
