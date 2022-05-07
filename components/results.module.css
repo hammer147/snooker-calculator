@@ -5,18 +5,19 @@
 }
 
 .container {
+  /* padding:0.5em; */
   flex: 1;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: 1px;
-  background-color: black;
+  /* column-gap: 1px; */
+  /* background-color: black; */
 }
 
 .card {
   background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
   padding: 0 0.5em;
 }
@@ -24,4 +25,18 @@
 .spaceBetween {
   display: flex;
   justify-content: space-between;
+}
+
+.calc {
+  margin: 0.5em 0;
+  width: 100%;
+  flex: 1;
+  padding: 0.5em;
+  /* background-color: #fd8153; */
+  background-color: #fa936d;
+  border-radius: 0.5em;
+}
+
+.player {
+  margin: 0.5em;
 }

@@ -84,7 +84,7 @@ const Results = () => {
             </div>
 
             {hideCalc || (
-              <div style={{background:'orange', padding:'5px'}}>
+              <div className={styles.calc}>
                 <div className={styles.needed}>{`To win ${playerOneToWin.winnerScore} - ${playerOneToWin.loserScore} (${playerOneToWin.winnerScore - playerOneToWin.loserScore}) needs:`}</div>
                 <div className={styles.steps}>{playerOneToWin.steps}</div>
               </div>
@@ -103,7 +103,7 @@ const Results = () => {
             </div>
 
             {hideCalc || (
-              <div style={{background:'orange', padding:'5px'}}>
+              <div className={styles.calc}>
                 <div className={styles.needed}>{`To win ${playerTwoToWin.winnerScore} - ${playerTwoToWin.loserScore} (${playerTwoToWin.winnerScore - playerTwoToWin.loserScore}) needs:`}</div>
                 <div className={styles.steps}>{playerTwoToWin.steps}</div>
               </div>
