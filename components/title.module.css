@@ -1,15 +1,14 @@
 .title {
   text-align: center;
-  color: white;
+  color: var(--title-white);
   font-weight: bold;
   padding: 0.5em;
-  /* margin-bottom: 1em; */
 }
 
 .blue {
-  background-color: #6287F9;
+  background-color: var(--title-blue);
 }
 
 .green {
-  background-color: #12BA9E;
+  background-color: var(--title-green);
 }

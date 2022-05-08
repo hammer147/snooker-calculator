@@ -15,26 +15,25 @@
 }
 
 .container span {
-  color: blue;
+  color: var(--number-value-color);
 }
 
 .container button {
-  background-color: white;
+  background-color: var(--bg-color);
   margin: 0 0.2em;
   border-radius: 0.2em;
 }
 
 .display {
   border-radius: 2em;
-  border: 3px solid white;
+  border: 3px solid var(--selectable-border-color-unselected);
 }
 
 .clickable:hover {
-  border-color: #ccc;
+  border-color: var(--selectable-border-color-hover);
   cursor: pointer;
 }
 
 .active, .active:hover {
-  border-color: #FE64A3
+  border-color: var(--selectable-border-color-selected);
 }
-

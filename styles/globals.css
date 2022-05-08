@@ -1,3 +1,18 @@
+:root {
+  --body-bg-img: radial-gradient(#ccc,#000);
+  --title-blue: #6287F9;
+  --title-green: #12BA9E;
+  --title-white: white;
+  --bg-color: white;
+  --results-calc-bg-color: #fa936d;
+  --grid-color: black;
+  --number-value-color: blue;
+  --selectable-border-color-unselected: var(--bg-color);
+  --selectable-border-color-hover: #ccc;
+  --selectable-border-color-selected: #FE64A3;
+  --result-active-player-color: var(--selectable-border-color-selected);
+}
+
 html,
 body {
   height: 100vh;
@@ -5,7 +20,7 @@ body {
   display:flex;
   align-items:center;
   justify-content:center;
-  background-image: radial-gradient(#ccc,#000);
+  background-image: var(--body-bg-img);
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,

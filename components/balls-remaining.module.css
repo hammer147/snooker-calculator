@@ -1,5 +1,5 @@
 .ballsRemaining {
-  background-color: white;
+  background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
 }
@@ -10,5 +10,3 @@
   justify-content: space-around;
   align-items: center;
 }
-
-/* duplicate css file, same as score.module.css*/

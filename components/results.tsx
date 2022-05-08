@@ -20,13 +20,15 @@ const Results = () => {
         <div className={styles.container}>
 
           <div className={styles.card}>
-            <div className={styles.player}>Player 1</div>
-            <div>{scorePlayerOne > scorePlayerTwo ? 'Won' : 'Lost'}</div>
+            <div className={`${styles.player} ${isActivePlayerOne ? styles.activePlayer : ''}`}>Player 1</div>
+            <hr />
+            <div className={styles.gameOver}>{scorePlayerOne > scorePlayerTwo ? 'Won' : 'Lost'}</div>
           </div>
 
           <div className={styles.card}>
-            <div className={styles.player}>Player 2</div>
-            <div>{scorePlayerOne > scorePlayerTwo ? 'Lost' : 'Won'}</div>
+            <div className={`${styles.player} ${isActivePlayerOne ? '' : styles.activePlayer}`}>Player 2</div>
+            <hr />
+            <div className={styles.gameOver}>{scorePlayerOne > scorePlayerTwo ? 'Lost' : 'Won'}</div>
           </div>
 
         </div>
@@ -41,19 +43,25 @@ const Results = () => {
         <div className={styles.container}>
 
           <div className={styles.card}>
-            <div className={styles.player}>Player 1</div>
+            <div className={`${styles.player} ${isActivePlayerOne ? styles.activePlayer : ''}`}>Player 1</div>
             <div>{scorePlayerOne > scorePlayerTwo ? 'Ahead 7' : 'Behind 7'}</div>
             <div>Available 7</div>
-            <div>{scorePlayerOne > scorePlayerTwo ? `To win ${scorePlayerOne + 7} - ${scorePlayerTwo} (${scorePlayerOne + 7 - scorePlayerTwo})` : `To win ${scorePlayerOne + 14} - ${scorePlayerTwo} (${scorePlayerOne + 14 - scorePlayerTwo})`}</div>
-            <div>{scorePlayerOne > scorePlayerTwo ? '1 Color' : '1 Color + Respotted Black'}</div>
+            <div className={styles.calc}>
+              <div>{scorePlayerOne > scorePlayerTwo ? `To win ${scorePlayerOne + 7} - ${scorePlayerTwo} (${scorePlayerOne + 7 - scorePlayerTwo})` : `To win ${scorePlayerOne + 14} - ${scorePlayerTwo} (${scorePlayerOne + 14 - scorePlayerTwo})`}</div>
+              <hr />
+              <div>{scorePlayerOne > scorePlayerTwo ? '1 Color' : '1 Color + Respotted Black'}</div>
+            </div>
           </div>
 
           <div className={styles.card}>
-            <div className={styles.player}>Player 2</div>
+            <div className={`${styles.player} ${isActivePlayerOne ? '' : styles.activePlayer}`}>Player 2</div>
             <div>{scorePlayerTwo > scorePlayerOne ? 'Ahead 7' : 'Behind 7'}</div>
             <div>Available 7</div>
-            <div>{scorePlayerTwo > scorePlayerOne ? `To win ${scorePlayerTwo + 7} - ${scorePlayerOne} (${scorePlayerTwo + 7 - scorePlayerOne})` : `To win ${scorePlayerTwo + 14} - ${scorePlayerOne} (${scorePlayerTwo + 14 - scorePlayerOne})`}</div>
-            <div>{scorePlayerTwo > scorePlayerOne ? '1 Color' : '1 Color + Respotted Black'}</div>
+            <div className={styles.calc}>
+              <div>{scorePlayerTwo > scorePlayerOne ? `To win ${scorePlayerTwo + 7} - ${scorePlayerOne} (${scorePlayerTwo + 7 - scorePlayerOne})` : `To win ${scorePlayerTwo + 14} - ${scorePlayerOne} (${scorePlayerTwo + 14 - scorePlayerOne})`}</div>
+              <hr />
+              <div>{scorePlayerTwo > scorePlayerOne ? '1 Color' : '1 Color + Respotted Black'}</div>
+            </div>
           </div>
 
         </div>
@@ -73,7 +81,7 @@ const Results = () => {
         <div className={styles.container}>
 
           <div className={styles.card}>
-            <div className={styles.player}>Player 1</div>
+            <div className={`${styles.player} ${isActivePlayerOne ? styles.activePlayer : ''}`}>Player 1</div>
 
             <div>
               <div className={styles.spaceBetween}>
@@ -86,13 +94,14 @@ const Results = () => {
             {hideCalc || (
               <div className={styles.calc}>
                 <div className={styles.needed}>{`To win ${playerOneToWin.winnerScore} - ${playerOneToWin.loserScore} (${playerOneToWin.winnerScore - playerOneToWin.loserScore}) needs:`}</div>
+                <hr />
                 <div className={styles.steps}>{playerOneToWin.steps}</div>
               </div>
             )}
           </div>
 
           <div className={styles.card}>
-            <div className={styles.player}>Player 2</div>
+            <div className={`${styles.player} ${isActivePlayerOne ? '' : styles.activePlayer}`}>Player 2</div>
 
             <div>
               <div className={styles.spaceBetween}>
@@ -105,6 +114,7 @@ const Results = () => {
             {hideCalc || (
               <div className={styles.calc}>
                 <div className={styles.needed}>{`To win ${playerTwoToWin.winnerScore} - ${playerTwoToWin.loserScore} (${playerTwoToWin.winnerScore - playerTwoToWin.loserScore}) needs:`}</div>
+                <hr />
                 <div className={styles.steps}>{playerTwoToWin.steps}</div>
               </div>
             )}

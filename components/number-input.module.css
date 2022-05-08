@@ -2,17 +2,16 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  background-color: black;
+  background-color: var(--grid-color);
   gap: 1px;
 }
 
 .value {
   grid-column: 1 / 4;
-  /* border: 1px solid black; */
   text-align: right;
   padding-right: 0.5em;
-  color: blue;
-  background-color: white;
+  color: var(--number-value-color);
+  background-color: var(--bg-color);
 }
 
 .clear {
@@ -20,7 +19,7 @@
 }
 
 .container button {
-  background-color: white;
+  background-color: var(--bg-color);
   border: 0;
   padding-top: 0.2em;
 }
