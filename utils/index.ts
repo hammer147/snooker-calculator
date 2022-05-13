@@ -115,7 +115,7 @@ export function whatIsNeeded(
         freeBallOnColors = '1 Free Ball'
       }
       if (colorsNeeded) {
-        colors = `${colorsNeeded} ${colorsNeeded === 1 ? 'Color' : 'Colors'}`
+        colors = `${colorsNeeded} ${colorsNeeded === 1 ? 'Colour' : 'Colours'}`
       }
       if (snookersNeeded) {
         snookers = `${snookersNeeded} ${snookersNeeded === 1 ? 'Snooker' : 'Snookers'}`

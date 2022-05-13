@@ -27,7 +27,7 @@ const BallsRemaining = () => {
         />
         <NumberInput number={number} setNumber={setNumber} />
         <NumberDisplay
-          displayText='Colors'
+          displayText='Colours'
           value={numColors}
           inputValue={number}
           subtract={(x: number) => dispatch(adjustRemainingBalls('numColors', -x))}

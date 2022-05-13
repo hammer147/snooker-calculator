@@ -55,7 +55,7 @@ const NextBall = () => {
             className={`${styles.option} ${nextIsColorAfterRed ? styles.active : ''}`}
             onClick={() => { dispatch(setNextBall('colorAfterRed')) }}
           >
-            Color after Red
+            Colour after Red
           </div>
         )}
         {!(numColors < 2) && (

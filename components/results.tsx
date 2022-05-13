@@ -49,7 +49,7 @@ const Results = () => {
             <div className={styles.calc}>
               <div>{scorePlayerOne > scorePlayerTwo ? `To win ${scorePlayerOne + 7} - ${scorePlayerTwo} (${scorePlayerOne + 7 - scorePlayerTwo})` : `To win ${scorePlayerOne + 14} - ${scorePlayerTwo} (${scorePlayerOne + 14 - scorePlayerTwo})`}</div>
               <hr />
-              <div>{scorePlayerOne > scorePlayerTwo ? '1 Color' : '1 Color + Respotted Black'}</div>
+              <div>{scorePlayerOne > scorePlayerTwo ? '1 Colour' : '1 Colour + Respotted Black'}</div>
             </div>
           </div>
 
@@ -60,7 +60,7 @@ const Results = () => {
             <div className={styles.calc}>
               <div>{scorePlayerTwo > scorePlayerOne ? `To win ${scorePlayerTwo + 7} - ${scorePlayerOne} (${scorePlayerTwo + 7 - scorePlayerOne})` : `To win ${scorePlayerTwo + 14} - ${scorePlayerOne} (${scorePlayerTwo + 14 - scorePlayerOne})`}</div>
               <hr />
-              <div>{scorePlayerTwo > scorePlayerOne ? '1 Color' : '1 Color + Respotted Black'}</div>
+              <div>{scorePlayerTwo > scorePlayerOne ? '1 Colour' : '1 Colour + Respotted Black'}</div>
             </div>
           </div>
 
