@@ -129,10 +129,10 @@ export function whatIsNeeded(
   freeBallOnly ? (steps ? steps += ' + ' + freeBallOnly : steps += freeBallOnly) : steps += ''
   separatedBlack ? (steps ? steps += ' + ' + separatedBlack : steps += separatedBlack) : steps += ''
   freeBallBlackCombination ? (steps ? steps += ' + ' + freeBallBlackCombination : steps += freeBallBlackCombination) : steps += ''
+  freeBallOnColors ? (steps ? steps += ' + ' + freeBallOnColors : steps += freeBallOnColors) : steps += ''
   snookers ? (steps ? steps += ' + ' + snookers : steps += snookers) : steps += ''
   redBlackCombinations ? (steps ? steps += ' + ' + redBlackCombinations : steps += redBlackCombinations) : steps += ''
   oneMoreRed ? (steps ? steps += ' + ' + oneMoreRed : steps += oneMoreRed) : steps += ''
-  freeBallOnColors ? (steps ? steps += ' + ' + freeBallOnColors : steps += freeBallOnColors) : steps += ''
   colors ? (steps ? steps += ' + ' + colors : steps += colors) : steps += ''
 
   if (steps === '') steps = 'Nothing'
