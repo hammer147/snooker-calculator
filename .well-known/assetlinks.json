@@ -1,0 +1,11 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vercel.snooker_calculator.twa",
+      "sha256_cert_fingerprints":
+        ["84:92:55:CE:B9:3B:22:38:A0:80:2D:8F:1A:EA:31:99:34:40:F6:8A:30:B7:C0:A6:A1:DF:69:2B:91:B5:50:76"]
+    }
+  }
+]
